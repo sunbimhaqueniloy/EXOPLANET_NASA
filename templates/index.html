@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXOPLANET HUNTER • NASA AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Video Background -->
+    <div id="video-background">
+        <video autoplay muted loop id="space-video">
+            <source src="{{ url_for('static', filename='assets/videos/space-background.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <!-- Main Interface -->
+    <div class="cosmic-interface">
+        <!-- Header -->
+        <header class="stellar-header">
+            <div class="nasa-badge">
+                <div class="nasa-logo">NASA</div>
+                <div class="mission-patch">
+                    <span class="patch-text">EXOPLANET</span>
+                    <span class="patch-text">HUNTER</span>
+                </div>
+            </div>
+            <h1 class="holographic-title">
+                <span class="title-glow">EXOPLANET</span>
+                <span class="title-glow">DETECTION SYSTEM</span>
+            </h1>
+            <div class="mission-status">
+                <div class="status-indicator active"></div>
+                <span>AI ACTIVE • READY FOR ANALYSIS</span>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <main class="cosmic-grid">
+            <!-- Left Panel - Detection Interface -->
+            <section class="detector-panel sci-fi-panel">
+                <div class="panel-header">
+                    <i class="fas fa-satellite"></i>
+                    <h2>PLANET DETECTION MATRIX</h2>
+                    <div class="panel-glow"></div>
+                </div>
+
+                <!-- Parameter Inputs -->
+                <div class="parameter-grid">
+                    <!-- Orbital Parameters -->
+                    <div class="parameter-group">
+                        <h3><i class="fas fa-orbit"></i> ORBITAL PARAMETERS</h3>
+                        
+                        <div class="input-field">
+                            <label class="sci-fi-label">
+                                <span class="label-text">ORBITAL PERIOD</span>
+                                <span class="label-unit">(days)</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" id="period" min="0.1" max="1000" value="10" step="0.1" class="cosmic-slider">
+                                <span class="slider-value" id="period-value">10.0</span>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label class="sci-fi-label">
+                                <span class="label-text">TRANSIT DEPTH</span>
+                                <span class="label-unit">(ppm)</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" id="depth" min="1" max="100000" value="1000" step="1" class="cosmic-slider">
+                                <span class="slider-value" id="depth-value">1000</span>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label class="sci-fi-label">
+                                <span class="label-text">TRANSIT DURATION</span>
+                                <span class="label-unit">(hours)</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" id="duration" min="0.1" max="24" value="3" step="0.1" class="cosmic-slider">
+                                <span class="slider-value" id="duration-value">3.0</span>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label class="sci-fi-label">
+                                <span class="label-text">IMPACT PARAMETER</span>
+                                <span class="label-unit">(0-1)</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" id="impact" min="0" max="1" value="0.3" step="0.01" class="cosmic-slider">
+                                <span class="slider-value" id="impact-value">0.30</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Physical Properties -->
+                    <div class="parameter-group">
+                        <h3><i class="fas fa-temperature-high"></i> PHYSICAL PROPERTIES</h3>
+                        
+                        <div class="input-field">
+                            <label class="sci-fi-label">
+                                <span class="label-text">EQUILIBRIUM TEMP</span>
+                                <span class="label-unit">(K)</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" id="teq" min="100" max="3000" value="500" step="1" class="cosmic-slider">
+                                <span class="slider-value" id="teq-value">500</span>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label class="sci-fi-label">
+                                <span class="label-text">SIGNAL-TO-NOISE</span>
+                                <span class="label-unit">(SNR)</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" id="snr" min="0.1" max="100" value="20" step="0.1" class="cosmic-slider">
+                                <span class="slider-value" id="snr-value">20.0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Star Properties -->
+                    <div class="parameter-group">
+                        <h3><i class="fas fa-star"></i> HOST STAR</h3>
+                        
+                        <div class="input-field">
+                            <label class="sci-fi-label">
+                                <span class="label-text">STAR TEMPERATURE</span>
+                                <span class="label-unit">(K)</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" id="steff" min="3000" max="10000" value="6000" step="10" class="cosmic-slider">
+                                <span class="slider-value" id="steff-value">6000</span>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label class="sci-fi-label">
+                                <span class="label-text">SURFACE GRAVITY</span>
+                                <span class="label-unit">(log g)</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" id="slogg" min="3.5" max="5.0" value="4.4" step="0.1" class="cosmic-slider">
+                                <span class="slider-value" id="slogg-value">4.4</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- False Positive Flags -->
+                    <div class="parameter-group">
+                        <h3><i class="fas fa-radiation"></i> FALSE POSITIVE FLAGS</h3>
+                        
+                        <div class="toggle-grid">
+                            <div class="toggle-field">
+                                <label class="toggle-label">
+                                    <input type="checkbox" id="fp_nt" class="sci-fi-toggle">
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-text">NOT TRANSIT-LIKE</span>
+                                </label>
+                            </div>
+                            <div class="toggle-field">
+                                <label class="toggle-label">
+                                    <input type="checkbox" id="fp_ss" class="sci-fi-toggle">
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-text">STELLAR ECLIPSE</span>
+                                </label>
+                            </div>
+                            <div class="toggle-field">
+                                <label class="toggle-label">
+                                    <input type="checkbox" id="fp_co" class="sci-fi-toggle">
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-text">CENTROID OFFSET</span>
+                                </label>
+                            </div>
+                            <div class="toggle-field">
+                                <label class="toggle-label">
+                                    <input type="checkbox" id="fp_ec" class="sci-fi-toggle">
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-text">EPHEMERIS MATCH</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detection Button -->
+                <button id="detect-btn" class="quantum-button">
+                    <div class="button-glow"></div>
+                    <i class="fas fa-search"></i>
+                    <span>INITIATE PLANET ANALYSIS</span>
+                    <div class="button-pulse"></div>
+                </button>
+            </section>
+
+            <!-- Right Panel - Results -->
+            <section class="results-panel sci-fi-panel">
+                <div class="panel-header">
+                    <i class="fas fa-chart-network"></i>
+                    <h2>ANALYSIS RESULTS</h2>
+                    <div class="panel-glow"></div>
+                </div>
+
+                <div id="results-container" class="results-container">
+                    <div class="waiting-state">
+                        <div class="scanning-animation">
+                            <div class="radar-sweep"></div>
+                            <div class="pulse-ring"></div>
+                        </div>
+                        <h3>SYSTEM READY</h3>
+                        <p>Awaiting celestial data input...</p>
+                    </div>
+
+                    <div id="results-content" class="results-content" style="display: none;">
+                        <!-- Results will be dynamically inserted here -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="cosmic-footer">
+            <div class="footer-grid">
+                <div class="system-info">
+                    <div class="info-item">
+                        <span class="info-label">AI MODEL:</span>
+                        <span class="info-value">RANDOM FOREST CLASSIFIER</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">TRAINING DATA:</span>
+                        <span class="info-value">KEPLER KOI CATALOG</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">ACCURACY:</span>
+                        <span class="info-value">95.2%</span>
+                    </div>
+                </div>
+                <div class="mission-clock">
+                    <div class="clock-label">MISSION TIME</div>
+                    <div id="mission-clock" class="clock-display">00:00:00</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/detector.js') }}"></script>
+</body>
+</html>
